@@ -1,0 +1,38 @@
+name: random-data-generator-api
+description: A comprehensive FastAPI-based REST API for generating various types of random data
+
+# Application configuration
+app:
+  type: web
+  port: 8000
+  healthcheck: /api/health
+  build:
+    dockerfile: Dockerfile
+    context: .
+
+# Environment variables
+env:
+  - name: PYTHONUNBUFFERED
+    value: "1"
+  - name: PORT
+    value: "8000"
+
+# Resources (adjust based on your needs)
+resources:
+  cpu: 0.5
+  memory: 512Mi
+
+# Scaling
+scaling:
+  min: 1
+  max: 3
+
+# Domains (you can add custom domains later)
+domains:
+  - random-data-api.elestio.app
+
+# Volumes (if needed for persistent data)
+# volumes:
+#   - name: data
+#     path: /app/data
+#     size: 1Gi 

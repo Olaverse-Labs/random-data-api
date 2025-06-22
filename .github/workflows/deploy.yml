@@ -1,0 +1,59 @@
+name: Deploy to Elest.io
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    
+    - name: Test with pytest
+      run: |
+        pip install pytest requests
+        python test_api.py
+    
+    - name: Build Docker image
+      run: |
+        docker build -t random-data-api .
+    
+    - name: Test Docker image
+      run: |
+        docker run -d --name test-api -p 8000:8000 random-data-api
+        sleep 10
+        curl -f http://localhost:8000/api/health
+        docker stop test-api
+        docker rm test-api
+
+  # Note: For actual deployment to Elest.io, you would need to:
+  # 1. Add your Elest.io API token as a GitHub secret
+  # 2. Use Elest.io's deployment API or webhook
+  # 3. Configure the deployment step accordingly
+  # 
+  # This is just a template - actual implementation depends on Elest.io's API
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    
+    steps:
+    - name: Deploy to Elest.io
+      run: |
+        echo "Deployment to Elest.io would happen here"
+        echo "You need to configure this based on Elest.io's deployment API"
+        echo "For now, deploy manually using the instructions in deploy.md" 
