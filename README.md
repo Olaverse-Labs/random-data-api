@@ -1,5 +1,11 @@
 # Random Data Generator API
 
+[![Python](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.104.1-green.svg)](https://fastapi.tiangolo.com/)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Deploy to Elest.io](https://img.shields.io/badge/Deploy%20to-Elest.io-00C4B3.svg)](https://elest.io)
+[![Docker](https://img.shields.io/badge/Docker-Ready-blue.svg)](https://www.docker.com/)
+
 A comprehensive FastAPI-based REST API for generating various types of random data. Perfect for testing, development, and data seeding purposes.
 
 ## Features
